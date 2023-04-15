@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    tools:context="models.MainActivity"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+    <LinearLayout
+
+        android:layout_height="40dp"
+        android:layout_width="140dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            app:srcCompat="@drawable/ic_icon_heart"
+            android:layout_weight="1"
+            android:id="@+id/main_IMG_heart1"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            app:srcCompat="@drawable/ic_icon_heart"
+            android:layout_weight="1"
+            android:id="@+id/main_IMG_heart2"
+            android:layout_marginHorizontal="10dp"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            app:srcCompat="@drawable/ic_icon_heart"
+            android:layout_weight="1"
+            android:id="@+id/main_IMG_heart3"/>
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/right_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/blue_200"
+        android:contentDescription="@string/todo"
+        android:src="@drawable/ic_icon_right_arrow"
+        tools:ignore="RelativeOverlap,ImageContrastCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+        android:id="@+id/left_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="32dp"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/blue_200"
+        android:contentDescription="@string/todo1"
+        android:src="@drawable/ic_icon_left_arrow"
+
+        tools:ignore="ImageContrastCheck" />
+
+    <LinearLayout
+        android:layout_height="100dp"
+        android:layout_width="360dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="80dp"
+        android:layout_marginLeft="20dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/left_car"
+            android:layout_height="80dp"
+            android:layout_width="0dp"
+            app:srcCompat="@drawable/ic_icon_car"
+            android:layout_weight="0.5"
+            android:layout_marginHorizontal="10dp"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/mid_car"
+            android:layout_height="80dp"
+            android:layout_width="10dp"
+            app:srcCompat="@drawable/ic_icon_car"
+            android:layout_weight="0.5"
+            android:layout_marginHorizontal="10dp"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/right_car"
+            android:layout_height="80dp"
+            android:layout_width="0dp"
+            android:layout_marginLeft="20dp"
+            app:srcCompat="@drawable/ic_icon_car"
+            android:layout_weight="0.5"
+            android:layout_marginHorizontal="10dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="80dp"
+        android:layout_width="350dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="580dp"
+        android:layout_marginLeft="20dp">
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/stone00"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            app:srcCompat="@drawable/ic_icon_stone"
+            android:layout_weight="0.5"
+            android:layout_marginHorizontal="20dp"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/stone01"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:layout_weight="0.5"
+            app:srcCompat="@drawable/ic_icon_stone" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/stone02"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            app:srcCompat="@drawable/ic_icon_stone"
+            android:layout_weight="0.5"
+            android:layout_marginHorizontal="10dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="80dp"
+        android:layout_width="350dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="505dp"
+        android:layout_marginLeft="20dp">
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/stone10"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            app:srcCompat="@drawable/ic_icon_stone"
+            android:layout_weight="0.5"
+            android:layout_marginHorizontal="20dp"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/stone11"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:layout_weight="0.5"
+            app:srcCompat="@drawable/ic_icon_stone" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/stone12"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            app:srcCompat="@drawable/ic_icon_stone"
+            android:layout_weight="0.5"
+            android:layout_marginHorizontal="10dp"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="80dp"
+        android:layout_width="350dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="425dp"
+        android:layout_marginLeft="20dp">
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/stone20"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            app:srcCompat="@drawable/ic_icon_stone"
+            android:layout_weight="0.5"
+            android:layout_marginHorizontal="20dp"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/stone21"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:layout_weight="0.5"
+            app:srcCompat="@drawable/ic_icon_stone" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/stone22"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            app:srcCompat="@drawable/ic_icon_stone"
+            android:layout_weight="0.5"
+            android:layout_marginHorizontal="10dp"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="80dp"
+        android:layout_width="350dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="345dp"
+        android:layout_marginLeft="20dp">
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/stone30"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            app:srcCompat="@drawable/ic_icon_stone"
+            android:layout_weight="0.5"
+            android:layout_marginHorizontal="20dp"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/stone31"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:layout_weight="0.5"
+            app:srcCompat="@drawable/ic_icon_stone" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/stone32"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            app:srcCompat="@drawable/ic_icon_stone"
+            android:layout_weight="0.5"
+            android:layout_marginHorizontal="10dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="80dp"
+        android:layout_width="350dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="265dp"
+        android:layout_marginLeft="20dp">
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/stone40"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            app:srcCompat="@drawable/ic_icon_stone"
+            android:layout_weight="0.5"
+            android:layout_marginHorizontal="20dp"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/stone41"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:layout_weight="0.5"
+            app:srcCompat="@drawable/ic_icon_stone" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/stone42"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            app:srcCompat="@drawable/ic_icon_stone"
+            android:layout_weight="0.5"
+            android:layout_marginHorizontal="10dp"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="80dp"
+        android:layout_width="350dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="185dp"
+        android:layout_marginLeft="20dp">
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/stone50"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            app:srcCompat="@drawable/ic_icon_stone"
+            android:layout_weight="0.5"
+            android:layout_marginHorizontal="20dp"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/stone51"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:layout_weight="0.5"
+            app:srcCompat="@drawable/ic_icon_stone" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/stone52"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            app:srcCompat="@drawable/ic_icon_stone"
+            android:layout_weight="0.5"
+            android:layout_marginHorizontal="10dp"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="80dp"
+        android:layout_width="350dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        android:layout_marginLeft="20dp">
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/stone60"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            app:srcCompat="@drawable/ic_icon_stone"
+            android:layout_weight="0.5"
+            android:layout_marginHorizontal="20dp"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/stone61"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:layout_weight="0.5"
+            app:srcCompat="@drawable/ic_icon_stone" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/stone62"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            app:srcCompat="@drawable/ic_icon_stone"
+            android:layout_weight="0.5"
+            android:layout_marginHorizontal="10dp"/>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
