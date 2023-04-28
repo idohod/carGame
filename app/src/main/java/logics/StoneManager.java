@@ -1,18 +1,15 @@
-package models;
+package logics;
 
 
-import static android.content.ContentValues.TAG;
-
-import android.util.Log;
 import android.view.View;
 
 import com.google.android.material.imageview.ShapeableImageView;
 
-public class StoneActivity {
+public class StoneManager {
 
     private ShapeableImageView[][] allStones;
 
-    public StoneActivity() {}
+    public StoneManager() {}
     public ShapeableImageView[][] getAllStones() {
         return allStones;
     }
@@ -28,11 +25,13 @@ public class StoneActivity {
         changeStone4Position();
         changeStone5Position();
         changeStone6Position();
+        changeStone7Position();
+        changeStone8Position();
     }
-    private int stone1PrePosition = 0;
-    private int stone1CurPosition = 1;
-    private int stone2PrePosition = 1;
-    private int stone2CurPosition = 2;
+    private int stone1PrePosition = 7;
+    private int stone1CurPosition = 8;
+    private int stone2PrePosition = 0;
+    private int stone2CurPosition = 1;
     private int stone3PrePosition = 2;
     private int stone3CurPosition = 3;
     private int stone4PrePosition = 3;
@@ -40,21 +39,25 @@ public class StoneActivity {
     private int stone5PrePosition = 4;
     private int stone5CurPosition = 5;
     private int stone6PrePosition = 6;
-    private int stone6CurPosition = 0;
+    private int stone6CurPosition = 7;
+    private int stone7PrePosition = 2;
+    private int stone7CurPosition = 3;
+    private int stone8PrePosition = 5;
+    private int stone8CurPosition = 6;
 
 
     private void changeStone1Position() {
            if (stone1PrePosition == allStones.length) {
-
                stone1PrePosition = 0;
+
            }
            if (stone1CurPosition == allStones.length) {
                stone1CurPosition = 0;
            }
 
-           if (allStones[stone1PrePosition][0].getVisibility() == View.VISIBLE) {
-               allStones[stone1PrePosition][0].setVisibility(View.INVISIBLE);
-               allStones[stone1CurPosition][0].setVisibility(View.VISIBLE);
+           if (allStones[stone1PrePosition][3].getVisibility() == View.VISIBLE) {
+               allStones[stone1PrePosition][3].setVisibility(View.INVISIBLE);
+               allStones[stone1CurPosition][3].setVisibility(View.VISIBLE);
 
                stone1PrePosition++;
                stone1CurPosition++;
@@ -68,6 +71,7 @@ public class StoneActivity {
         }
         if (stone2CurPosition == allStones.length) {
             stone2CurPosition = 0;
+
         }
 
         if (allStones[stone2PrePosition][1].getVisibility() == View.VISIBLE) {
@@ -144,6 +148,42 @@ public class StoneActivity {
 
             stone6PrePosition++;
             stone6CurPosition++;
+        }
+
+    }
+    private void changeStone7Position() {
+        if (stone7PrePosition == allStones.length) {
+
+            stone7PrePosition = 0;
+        }
+        if (stone7CurPosition == allStones.length) {
+            stone7CurPosition = 0;
+        }
+
+        if (allStones[stone7PrePosition][3].getVisibility() == View.VISIBLE) {
+            allStones[stone7PrePosition][3].setVisibility(View.INVISIBLE);
+            allStones[stone7CurPosition][3].setVisibility(View.VISIBLE);
+
+            stone7PrePosition++;
+            stone7CurPosition++;
+        }
+
+    }
+    private void changeStone8Position() {
+        if (stone8PrePosition == allStones.length) {
+
+            stone8PrePosition = 0;
+        }
+        if (stone8CurPosition == allStones.length) {
+            stone8CurPosition = 0;
+        }
+
+        if (allStones[stone8PrePosition][4].getVisibility() == View.VISIBLE) {
+            allStones[stone8PrePosition][4].setVisibility(View.INVISIBLE);
+            allStones[stone8CurPosition][4].setVisibility(View.VISIBLE);
+
+            stone8PrePosition++;
+            stone8CurPosition++;
         }
 
     }

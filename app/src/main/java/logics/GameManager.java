@@ -13,11 +13,23 @@ public class GameManager {
     private int crash;
     private int life;
 
+    private int score;
+
     public GameManager(int life) {
         this.crash = 0;
+        this.score = 0;
         this.life = life;
     }
+    public boolean isGameEnded(){
+        return crash == life;
+    }
+    public int getScore() {
+        return score;
+    }
 
+    public void setScore(int score) {
+        this.score = score;
+    }
     public int getCrash() {
         return crash;
     }
@@ -33,12 +45,10 @@ public class GameManager {
     public void setLife(int life) {
         this.life = life;
     }
-    public boolean isGameEnded(){
-        return crash == life;
-    }
+
 
     public void createToast(Context context) {
-        Toast.makeText(context,"crash!",Toast.LENGTH_LONG).show();
+        Toast.makeText(context,"crash! -5 points",Toast.LENGTH_LONG).show();
 
     }
 

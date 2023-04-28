@@ -1,11 +1,10 @@
-package models;
+package logics;
 
 import com.google.android.material.imageview.ShapeableImageView;
 
-public class carActivity {
-
-    private int carCurPosition = 1;
-    private int carPrePosition = 0;
+public class CarManager  {
+    private int carCurPosition = 2;
+    private int carPrePosition = 1;
 
     private ShapeableImageView[] cars;
 
@@ -17,8 +16,7 @@ public class carActivity {
         this.cars = cars;
     }
 
-    public carActivity() {}
-
+    public CarManager() {}
 
     public int getCarCurPosition() {
         return carCurPosition;
@@ -35,4 +33,19 @@ public class carActivity {
     public void setCarPrePosition(int carPrePosition) {
         this.carPrePosition = carPrePosition;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
