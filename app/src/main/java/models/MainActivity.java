@@ -5,6 +5,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import logics.App;
 import logics.CarManager;
 import logics.CoinManager;
 import logics.GameManager;
@@ -28,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private final StoneManager stoneManager = new StoneManager();
     private final CarManager carManager = new CarManager();
     private final CoinManager coinManager = new CoinManager();
+
+    private final App app = new App();
 
     private final Handler handler = new Handler();
     private final int DELAY = 800;
@@ -72,6 +76,18 @@ public class MainActivity extends AppCompatActivity {
         refreshUI();
 
     }
+    protected void onPause(){
+        super.onPause();
+        handler.removeCallbacks(runnable);
+    }
+  protected void onResume(){
+       super.onResume();
+       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+          if(!handler.hasCallbacks(runnable)){
+              handler.postDelayed(runnable,DELAY);
+           }
+       }
+   }
 
     private void startView() {
         for(int i = 0; i< carManager.getCars().length; i++){
@@ -122,22 +138,30 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private boolean collectCoin() {
-        for(int i = 0; i< carManager.getCars().length; i++){
+        for(int i = 0; i<carManager.getCars().length; i++){
             if(carManager.getCars()[i].getVisibility() == View.VISIBLE &&
                     coinManager.getAllCoins()[coinManager.getAllCoins().length-1][i].getVisibility()==View.VISIBLE){
-                //coinManager.getAllCoins()[coinManager.getAllCoins().length-1][i].setVisibility(View.INVISIBLE);
-               // coinManager.getAllCoins()[0][i].setVisibility(View.VISIBLE);
+                coinManager.getAllCoins()[coinManager.getAllCoins().length-1][i].setVisibility(View.INVISIBLE);
+                coinManager.getAllCoins()[0][i].setVisibility(View.VISIBLE);
+                if(i==4){
+                    coinManager.setCoin1PrePosition(0);
+                    coinManager.setCoin1CurPosition(1);
+                }
+                else if(i==1){
+                    coinManager.setCoin2PrePosition(0);
+                    coinManager.setCoin2CurPosition(1);
 
+                }
                 return true;
             }
         }
         return false;
-
     }
+
     private void makeVibratorAndToast(){
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        gameManager.createVibrator(v);
-        gameManager.createToast(getApplicationContext());
+        app.createVibrator(v);
+        app.createToast(getApplicationContext());
 
     }
     private void refreshUI()  {
@@ -179,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(left_button.isPressed() || right_button.isPressed())
             gameManager.setScore(gameManager.getScore());
-        if(collectCoin()){
+        else if(collectCoin()){
             gameManager.setScore(gameManager.getScore() + 20);
         }
         else if (checkCrash()){

@@ -23,6 +23,38 @@ public class CoinManager {
     private int coin2PrePosition = 2;
     private int coin2CurPosition = 3;
 
+    public int getCoin1PrePosition() {
+        return coin1PrePosition;
+    }
+
+    public void setCoin1PrePosition(int coin1PrePosition) {
+        this.coin1PrePosition = coin1PrePosition;
+    }
+
+    public int getCoin1CurPosition() {
+        return coin1CurPosition;
+    }
+
+    public void setCoin1CurPosition(int coin1CurPosition) {
+        this.coin1CurPosition = coin1CurPosition;
+    }
+
+    public int getCoin2PrePosition() {
+        return coin2PrePosition;
+    }
+
+    public void setCoin2PrePosition(int coin2PrePosition) {
+        this.coin2PrePosition = coin2PrePosition;
+    }
+
+    public int getCoin2CurPosition() {
+        return coin2CurPosition;
+    }
+
+    public void setCoin2CurPosition(int coin2CurPosition) {
+        this.coin2CurPosition = coin2CurPosition;
+    }
+
     public void changeAllCoins() {
         changeCoin1Position();
         changeCoin2Position();
