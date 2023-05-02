@@ -51,11 +51,9 @@ public class MainActivity extends AppCompatActivity {
     private final Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            Log.d(TAG, "setDelay: "+DELAY);
-
             handler.postDelayed(this, DELAY);
             coinManager.changeAllCoins();
-           stoneManager.changeAllStones();
+            stoneManager.changeAllStones();
             refreshUI();
         }
     };
