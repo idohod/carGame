@@ -3,5 +3,7 @@
     <string name="todo">TODO</string>
     <string name="todo1">TODO!</string>
     <string name="w" />
+    <string name="play_slow">Play Slow</string>
+    <string name="play_fast">Play Fast</string>
 
 </resources>

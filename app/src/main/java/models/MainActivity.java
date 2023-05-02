@@ -1,14 +1,18 @@
 package models;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -34,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private final App app = new App();
 
     private final Handler handler = new Handler();
-    private final int DELAY = 800;
+    private  int DELAY =0;
     private GameManager gameManager;
     private FloatingActionButton left_button;
     private FloatingActionButton right_button;
@@ -47,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private final Runnable runnable = new Runnable() {
         @Override
         public void run() {
+            Log.d(TAG, "setDelay: "+DELAY);
 
             handler.postDelayed(this, DELAY);
             coinManager.changeAllCoins();
@@ -54,40 +59,47 @@ public class MainActivity extends AppCompatActivity {
             refreshUI();
         }
     };
+        private void setDelay(){
+            Intent i = getIntent();
+            DELAY = i.getIntExtra("KEY_DELAY",0);
+            Log.d(TAG, "setDelay: "+DELAY);
+        }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        findViews();
-        startView();
-        gameManager = new GameManager(hearts.length);
-        Glide
-                .with(this)
-                .load("https://img.freepik.com/premium-photo/night-sky-with-many-stars_104337-8996.jpg")
-                .centerCrop()
-                .placeholder(R.drawable.ic_launcher_background)
-                .into(backgroundImage);
+       @Override
+      protected void onCreate(Bundle savedInstanceState) {
+           super.onCreate(savedInstanceState);
+           setContentView(R.layout.activity_main);
+           findViews();
+           startView();
+           setDelay();
+           gameManager = new GameManager(hearts.length);
+           Glide
+                   .with(this)
+                   .load("https://img.freepik.com/premium-photo/night-sky-with-many-stars_104337-8996.jpg")
+                   .centerCrop()
+                   .placeholder(R.drawable.ic_launcher_background)
+                   .into(backgroundImage);
 
 
-        left_button.setOnClickListener(v -> changeCarPosition());
-        right_button.setOnClickListener(v -> changeCarPosition());
-        handler.postDelayed(runnable, DELAY);
-        refreshUI();
+           left_button.setOnClickListener(v -> changeCarPosition());
+           right_button.setOnClickListener(v -> changeCarPosition());
+           handler.postDelayed(runnable, DELAY);
+           refreshUI();
 
-    }
-    protected void onPause(){
-        super.onPause();
-        handler.removeCallbacks(runnable);
-    }
-  protected void onResume(){
-       super.onResume();
-       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-          if(!handler.hasCallbacks(runnable)){
-              handler.postDelayed(runnable,DELAY);
-           }
        }
-   }
+
+       protected void onPause(){
+           super.onPause();
+           handler.removeCallbacks(runnable);
+       }
+     protected void onResume(){
+          super.onResume();
+          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+             if(!handler.hasCallbacks(runnable)){
+                 handler.postDelayed(runnable,DELAY);
+              }
+          }
+      }
 
     private void startView() {
         for(int i = 0; i< carManager.getCars().length; i++){
@@ -143,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
                     coinManager.getAllCoins()[coinManager.getAllCoins().length-1][i].getVisibility()==View.VISIBLE){
                 coinManager.getAllCoins()[coinManager.getAllCoins().length-1][i].setVisibility(View.INVISIBLE);
                 coinManager.getAllCoins()[0][i].setVisibility(View.VISIBLE);
+
                 if(i==4){
                     coinManager.setCoin1PrePosition(0);
                     coinManager.setCoin1CurPosition(1);
@@ -152,12 +165,30 @@ public class MainActivity extends AppCompatActivity {
                     coinManager.setCoin2CurPosition(1);
 
                 }
+                help();
                 return true;
             }
         }
         return false;
     }
+    private void help(){
+        for(int i=0;i<coinManager.getAllCoins()[0].length;i++){
+            if(coinManager.getAllCoins()[0][i].getVisibility()==View.VISIBLE &&
+            stoneManager.getAllStones()[0][i].getVisibility()==View.VISIBLE) {
+                coinManager.getAllCoins()[0][i].setVisibility(View.INVISIBLE);
+                coinManager.getAllCoins()[1][i].setVisibility(View.VISIBLE);
 
+                if (i == 4) {
+                    coinManager.setCoin1PrePosition(1);
+                    coinManager.setCoin1CurPosition(2);
+                }
+                else if(i==1){
+                    coinManager.setCoin2PrePosition(1);
+                    coinManager.setCoin2CurPosition(2);
+                }
+            }
+        }
+    }
     private void makeVibratorAndToast(){
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         app.createVibrator(v);
@@ -231,6 +262,7 @@ public class MainActivity extends AppCompatActivity {
         }
         refreshUI();
         checkCrash();
+        collectCoin();
 
     }
 
