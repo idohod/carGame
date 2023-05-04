@@ -3,21 +3,24 @@ package models;
 import java.util.ArrayList;
 
 public class RecordList {
-    private ArrayList<Record> allRecords;
+    private ArrayList<Record> records = new ArrayList<>();
 
     public RecordList() {
-        this.allRecords = new ArrayList<>();
+        this.records = records;
     }
 
-    public ArrayList<Record> getAllRecords() {
-        return allRecords;
+    public ArrayList<Record> getRecords() {
+        return records;
     }
 
-    public void setAllRecords(ArrayList<Record> allRecords) {
-        this.allRecords = allRecords;
+    public void setRecords(ArrayList<Record> records) {
+        this.records = records;
     }
 
-    public void addRecord(Record r){
-        allRecords.add(r);
+    @Override
+    public String toString() {
+        return "RecordList{" +
+                "records=" + records +
+                '}';
     }
 }

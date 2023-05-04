@@ -43,5 +43,25 @@
         android:text="@string/play_slow" />
 
 
+        <com.google.android.material.button.MaterialButton
+
+            android:id="@+id/sensor_button"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/slow_button"
+            android:textSize="19sp"
+            android:text="sensor mode" />
+
+        <com.google.android.material.button.MaterialButton
+
+            android:id="@+id/records_button"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/sensor_button"
+            android:textSize="19sp"
+            android:text="show records" />
+
     </RelativeLayout>
 </RelativeLayout>

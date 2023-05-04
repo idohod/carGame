@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import interfaces.SensorCallback;
 import logics.App;
 import logics.CarManager;
 import logics.CoinManager;
@@ -48,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
 
     private AppCompatImageView backgroundImage;
 
+    private  RecordList allRecords = new RecordList();
+
+    private SensorMove sensorMove;
+
     private final Runnable runnable = new Runnable() {
         @Override
         public void run() {
@@ -62,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
             DELAY = i.getIntExtra("KEY_DELAY",0);
             Log.d(TAG, "setDelay: "+DELAY);
         }
+    private boolean sensorMode(){
+        Intent i = getIntent();
+        int flag = i.getIntExtra("KEY_SENSOR",0);
+        return flag == 1;
+    }
 
        @Override
       protected void onCreate(Bundle savedInstanceState) {
@@ -78,17 +88,55 @@ public class MainActivity extends AppCompatActivity {
                    .placeholder(R.drawable.ic_launcher_background)
                    .into(backgroundImage);
 
+            if(!sensorMode()) {
+                left_button.setOnClickListener(v -> changeCarPosition());
+                right_button.setOnClickListener(v -> changeCarPosition());
 
-           left_button.setOnClickListener(v -> changeCarPosition());
-           right_button.setOnClickListener(v -> changeCarPosition());
+            }
+            else {
+                DELAY = 1000;
+                InitSensorMove();
+            }
            handler.postDelayed(runnable, DELAY);
            refreshUI();
 
        }
 
+    private void InitSensorMove() {
+        sensorMove = new SensorMove(this, new SensorCallback() {
+            @Override
+            public void stepX() {
+                carManager.setCarCurPosition(sensorMove.getCarPositionX());
+                carManager.setCarPrePosition(sensorMove.getCarPrePosition());
+
+                refreshUI();
+            }
+
+            @Override
+            public void stepY()
+            {
+
+            }
+
+            @Override
+            public void stepZ() {
+
+            }
+        });
+    }
+
+
+
+    public void onBackPressed() {
+            super.onBackPressed();
+
+        }
        protected void onPause(){
            super.onPause();
            handler.removeCallbacks(runnable);
+           if(sensorMode()){
+               sensorMove.stop();
+           }
        }
      protected void onResume(){
           super.onResume();
@@ -97,9 +145,16 @@ public class MainActivity extends AppCompatActivity {
                  handler.postDelayed(runnable,DELAY);
               }
           }
+          if(sensorMode()){
+              sensorMove.start();
+          }
       }
 
     private void startView() {
+        if(sensorMode()) {
+            left_button.setVisibility(View.INVISIBLE);
+            right_button.setVisibility(View.INVISIBLE);
+        }
         for(int i = 0; i< carManager.getCars().length; i++){
             if(i!=2){
                 carManager.getCars()[i].setVisibility(View.INVISIBLE);
@@ -215,6 +270,8 @@ public class MainActivity extends AppCompatActivity {
         if(gameManager.isGameEnded()) {
             hearts[0].setVisibility(View.INVISIBLE);
             gameManager.setCrash(0);
+            allRecords.getRecords().add( new Record(gameManager.getScore()));
+
         }
     }
 
@@ -230,7 +287,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void changeScore() {
 
-        if(left_button.isPressed() || right_button.isPressed())
+        if(!sensorMode() && (left_button.isPressed() || right_button.isPressed()))
             gameManager.setScore(gameManager.getScore());
         else if(collectCoin()){
             gameManager.setScore(gameManager.getScore() + 20);
@@ -249,15 +306,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void changeCarPosition() {
-        if(right_button.isPressed() && carManager.getCarCurPosition() < carManager.getCars().length-1) {
-           carManager.setCarPrePosition(carManager.getCarCurPosition());
-            carManager.setCarCurPosition(carManager.getCarCurPosition()+1);
-        }
-        else if(left_button.isPressed() && carManager.getCarCurPosition() > 0) {
-            carManager.setCarPrePosition(carManager.getCarCurPosition());
-            carManager.setCarCurPosition(carManager.getCarCurPosition()-1);
+            if(!sensorMode()) {
+                if (right_button.isPressed() && carManager.getCarCurPosition() < carManager.getCars().length - 1) {
+                    carManager.setCarPrePosition(carManager.getCarCurPosition());
+                    carManager.setCarCurPosition(carManager.getCarCurPosition() + 1);
+                } else if (left_button.isPressed() && carManager.getCarCurPosition() > 0) {
+                    carManager.setCarPrePosition(carManager.getCarCurPosition());
+                    carManager.setCarCurPosition(carManager.getCarCurPosition() - 1);
 
-        }
+                }
+            }
         refreshUI();
         checkCrash();
         collectCoin();
@@ -301,8 +359,11 @@ public class MainActivity extends AppCompatActivity {
                 {findViewById(R.id.coin80), findViewById(R.id.coin81),findViewById(R.id.coin82),findViewById(R.id.coin83),findViewById(R.id.coin84)}
 
         });
-        left_button = findViewById(R.id.left_fab);
-        right_button = findViewById(R.id.right_fab);
+
+            left_button = findViewById(R.id.left_fab);
+            right_button = findViewById(R.id.right_fab);
+
+
         textScore =findViewById(R.id.score);
         backgroundImage = findViewById(R.id.background);
     }

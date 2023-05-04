@@ -30,6 +30,10 @@
             android:name="models.MainActivity"
             android:exported="true">
         </activity>
+        <activity
+            android:name="models.RecordsActivity"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>
