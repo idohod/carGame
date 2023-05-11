@@ -1,14 +1,5 @@
 package logics;
 
-import static android.content.ContentValues.TAG;
-
-import android.content.Context;
-import android.os.Build;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
-import android.util.Log;
-import android.widget.Toast;
-
 public class GameManager {
     private int crash;
     private int life;

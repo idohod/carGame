@@ -1,45 +1,50 @@
 package models;
 
-import static android.content.ContentValues.TAG;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.carsgame.R;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.textview.MaterialTextView;
-
-import logics.CarManager;
+import com.google.gson.Gson;
 
 public class MenuActivity extends AppCompatActivity {
 
     private MaterialTextView menuTitle;
-    private MaterialButton slowButton;
-    private MaterialButton fastButton;
-    private MaterialButton sensorButton;
+    private MaterialTextView buttonsTitle;
+    private MaterialTextView sensorTitle;
+    private ExtendedFloatingActionButton slowButton;
+    private ExtendedFloatingActionButton fastButton;
+    private ExtendedFloatingActionButton sensorButton;
 
-    private MaterialButton RecordsButton;
+    private ExtendedFloatingActionButton RecordsButton;
+    private AppCompatImageView backgroundImage;
 
-private CarManager carManager=new CarManager();
-    @SuppressLint("SetTextI18n")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         findViews();
+        Glide
+                .with(this)
+                .load("https://wallpaperaccess.com/full/184117.jpg")
+                .centerCrop()
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(backgroundImage);
+
         slowButton.setOnClickListener(v -> setDelay());
         fastButton.setOnClickListener(v -> setDelay());
         sensorButton.setOnClickListener(v -> SetSensors());
         RecordsButton.setOnClickListener(v -> showRecords());
-        menuTitle.setText("Cars Game");
+
     }
 
     private void showRecords() {
-        Intent i= new Intent(MenuActivity.this, RecordsActivity.class);
-        i.putExtra("",2);
+        Intent i = new Intent(MenuActivity.this, recordsActivity.class);
         startActivity(i);
 
     }
@@ -48,7 +53,6 @@ private CarManager carManager=new CarManager();
         Intent intent = new Intent(MenuActivity.this, MainActivity.class);
         intent.putExtra("KEY_SENSOR", 1);
         startActivity(intent);
-        Log.d(TAG, "cur: "+carManager.getCarCurPosition()+ "pre: "+carManager.getCarPrePosition());
     }
 
     private void setDelay() {
@@ -63,9 +67,14 @@ private CarManager carManager=new CarManager();
     }
 
     private void findViews() {
+        backgroundImage = findViewById(R.id.background);
+
         menuTitle = findViewById(R.id.menu_title);
-        slowButton = findViewById(R.id.slow_button);
+        buttonsTitle = findViewById(R.id.speed_mode);
+        sensorTitle = findViewById(R.id.sensor_mode);
+
         fastButton = findViewById(R.id.fast_button);
+        slowButton = findViewById(R.id.slow_button);
         sensorButton = findViewById(R.id.sensor_button);
         RecordsButton = findViewById(R.id.records_button);
     }

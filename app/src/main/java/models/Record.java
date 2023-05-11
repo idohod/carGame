@@ -2,10 +2,11 @@ package models;
 
 public class Record {
 
-    private int score;
+   private int score;
 
     public Record(int score) {
-        this.score = score;
+        this.score =score;
+
     }
 
     public int getScore() {
@@ -14,10 +15,5 @@ public class Record {
 
     public void setScore(int score) {
         this.score = score;
-    }
-
-    @Override
-    public String toString() {
-        return "your score: " + score;
     }
 }

@@ -5,5 +5,15 @@
     <string name="w" />
     <string name="play_slow">Play Slow</string>
     <string name="play_fast">Play Fast</string>
+    <string name="title_activity_records_list">RecordsList</string>
+    <string name="title_activity_record_list">recordList</string>
+    <string name="title_activity_records">activity_records</string>
+    <string name="title_activity_main">MainActivity</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="_000">000</string>
+    <string name="your_score">your score:</string>
+    <string name="sensor">sensor</string>
+    <string name="show_my_records">show my records</string>
 
 </resources>

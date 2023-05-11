@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".records_activity">
+    tools:context=".RecordsActivity">
 
     <FrameLayout
-        android:id="@+id/records_list"
+        android:id="@+id/main_FRAME_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -17,12 +19,12 @@
         />
 
     <FrameLayout
-        android:id="@+id/records_map"
+        android:id="@+id/main_FRAME_map"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:padding="20dp"
-        android:background="@color/red_200"
+        android:background="@color/green_500"
         />
 
 

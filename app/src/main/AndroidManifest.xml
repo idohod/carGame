@@ -3,9 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name="models.App1"
+
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -14,26 +16,28 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.CarsGame"
         tools:targetApi="31">
-
-        <activity
-        android:name="models.MenuActivity"
-        android:exported="true">
-
-             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                 <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
-
-        </activity>
         <activity
             android:name="models.MainActivity"
-            android:exported="true">
+            android:exported="true" >
+
+        </activity>
+
+    <activity
+            android:name="models.recordsActivity"
+            android:exported="false" >
+
         </activity>
         <activity
-            android:name="models.RecordsActivity"
+            android:name="models.MenuActivity"
+
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
