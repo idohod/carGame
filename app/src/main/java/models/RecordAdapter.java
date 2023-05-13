@@ -43,8 +43,15 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
     public void onBindViewHolder(@NonNull RecordViewHolder holder, int position) {
         Record record = recordsList.get(position);
         holder.theScore.setText(""+record.getScore());
-        holder.textScore.setText("your score: ");
-
+        if (recordsList.get(0)==recordsList.get(position)){
+           holder.textScore.setText("best score: ");
+        }
+        else if (recordsList.get(1)==recordsList.get(position)){
+            holder.textScore.setText("2nd score: ");
+        }
+        else{
+            holder.textScore.setText((position+1)+"th score: ");
+        }
     }
 
     @Override
@@ -64,13 +71,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
         public RecordViewHolder(@NonNull View itemView) {
             super(itemView);
             textScore = itemView.findViewById(R.id.text_score);
-            theScore =itemView.findViewById(R.id.the_score);
-            itemView.setOnClickListener(v->{
-                if(recordCallback!= null)
-                    recordCallback.itemClicked(getItem(getAdapterPosition()), getAdapterPosition());
-
-                    }
-                    );
+            theScore = itemView.findViewById(R.id.the_score);
         }
     }
 }

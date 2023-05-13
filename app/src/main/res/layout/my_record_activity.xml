@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue_200">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/my_score_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="your score"
+            android:textSize="50sp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/my_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/my_score_text"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            android:text="0000"
+            android:textSize="40sp" />
+        <Button
+            android:id="@+id/all_records_button"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:layout_below="@id/my_score"
+            android:layout_marginTop="100dp"
+            android:layout_centerHorizontal="true"
+            android:textSize="30sp"
+            android:text="show all records"/>
+
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:layout_below="@id/all_records_button"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:textSize="30sp"
+            android:text="back to menu"/>
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -28,10 +28,10 @@ public class ListFragment extends Fragment {
 
     private ArrayList<Record> allRecords;
     private RecyclerView recyclerView;
-    private RecordCallback callBack_SendClick;
+    private RecordCallback recordCallback;
 
-    public void setCallBack(RecordCallback callBack_SendClick) {
-        this.callBack_SendClick = callBack_SendClick;
+    public void setCallBack(RecordCallback recordCallback) {
+        this.recordCallback = recordCallback;
     }
         @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,24 +47,12 @@ public class ListFragment extends Fragment {
             recyclerView.setHasFixedSize(true);
             RecordAdapter recordAdapter = new RecordAdapter(getContext(), allRecords);
             recyclerView.setAdapter(recordAdapter);
-            recordAdapter.setRecordCallback(new RecordCallback() {
-
-                @Override
-                public void itemClicked(Record record, int position) {
-                    record.setScore(1000);
-                    recyclerView.getAdapter().notifyDataSetChanged();
-
-                }
-            });
             return view;
-
         }
 
-    private void sendClicked() {
-        if(callBack_SendClick != null){
-           // callBack_SendClick.userNameChosen(list_ET_name.getText().toString());
-        }
-    }
+
+
+
 
     private void load(){
 

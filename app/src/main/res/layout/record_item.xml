@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/your_score"
                 android:textColor="@color/black"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 android:textStyle="bold"/>
 
             <com.google.android.material.textview.MaterialTextView
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/_000"
                 android:textColor="@color/black"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 android:textStyle="bold"/>
         </LinearLayout>
 

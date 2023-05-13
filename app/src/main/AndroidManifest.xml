@@ -4,10 +4,11 @@
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name="models.App1"
-
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -16,20 +17,29 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.CarsGame"
         tools:targetApi="31">
+
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDGC6hVYxdVcfpi2G_lc9wdTcF8wGdl9fA" />
+
         <activity
             android:name="models.MainActivity"
-            android:exported="true" >
+            android:exported="true">
 
         </activity>
-
-    <activity
+        <activity
             android:name="models.recordsActivity"
-            android:exported="false" >
+            android:exported="false">
+
+        </activity>
+        <activity
+            android:name="models.MyRecordActivity"
+            android:exported="false">
 
         </activity>
         <activity
             android:name="models.MenuActivity"
-
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,6 +47,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
 
     </application>
 

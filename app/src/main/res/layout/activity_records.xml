@@ -6,15 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp"
+    android:padding="5dp"
     tools:context=".RecordsActivity">
 
     <FrameLayout
         android:id="@+id/main_FRAME_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="20dp"
+        android:layout_weight="0.8"
         android:background="@color/blue_200"
         />
 
@@ -23,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="20dp"
+        android:padding="5dp"
         android:background="@color/green_500"
         />
 

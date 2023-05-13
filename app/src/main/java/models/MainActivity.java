@@ -28,6 +28,7 @@ import logics.GameManager;
 import logics.StoneManager;
 import utilities.MySP;
 import android.app.Application;
+import android.widget.Toast;
 
 import com.example.carsgame.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -91,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
             allRecords = new RecordList();
         }
         allRecords.setAllRecords(recordListFromJson.getAllRecords());
-
 
     }
     @Override
@@ -308,7 +308,10 @@ public class MainActivity extends AppCompatActivity {
             hearts[0].setVisibility(View.INVISIBLE);
             gameManager.setCrash(0);
             addRecord();
-            gameManager.setScore(0);
+            Intent in = new Intent(MainActivity.this,MyRecordActivity.class);
+            in.putExtra("MY_RECORD",gameManager.getScore());
+            startActivity(in);
+
         }
     }
 
@@ -333,15 +336,15 @@ public class MainActivity extends AppCompatActivity {
 
        if(allRecords.getAllRecords().size() >0) {
            if (newRecord.getScore() >= maxRecord().getScore()) {
-               if (allRecords.getAllRecords().size() < 10) {
-                  allRecords.getAllRecords().add(0,newRecord);
-                  return true;
-
-               } else if (allRecords.getAllRecords().size() == 10) {
+               if (allRecords.getAllRecords().size() == 10) {
                    allRecords.getAllRecords().remove(9);
-                   allRecords.getAllRecords().add(0, newRecord);
-                   allRecords.setAllRecords(allRecords.getAllRecords());
-                    return true;
+                   allRecords.getAllRecords().add(0,newRecord);
+                   return true;
+
+               } else if (allRecords.getAllRecords().size() < 10) {
+                        allRecords.getAllRecords().add(0,newRecord);
+
+                   return true;
                }
            }
        }
@@ -349,7 +352,6 @@ public class MainActivity extends AppCompatActivity {
    }
 
     private void putRecordInPosition(Record newRecord) {
-
         if (allRecords.getAllRecords().size() == 0) {
             allRecords.getAllRecords().add(newRecord);
         }
@@ -367,7 +369,7 @@ public class MainActivity extends AppCompatActivity {
                             newRecord.getScore() >= allRecords.getAllRecords().get(i).getScore()) {
                         allRecords.getAllRecords().add(i, newRecord);
 
-                        if (allRecords.getAllRecords().size() == 10) {
+                        if (allRecords.getAllRecords().size() == 11) {
                             allRecords.getAllRecords().remove(10);
                             return;
                         }
