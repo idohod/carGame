@@ -2,10 +2,8 @@ package models;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.widget.Button;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.carsgame.R;
@@ -29,11 +27,29 @@ public class MyRecordActivity extends AppCompatActivity {
         setMyScore();
 
     }
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(MyRecordActivity.this,MenuActivity.class));
+    }
 
+    public void onDestroy() {
+        super.onDestroy();
+
+
+    }
+    protected void onPause() {
+        super.onPause();
+
+    }
+
+    protected void onResume() {
+        super.onResume();
+
+    }
     private void setMyScore(){
         Intent in = getIntent();
         int score = in.getIntExtra("MY_RECORD",0);
-        myScore.setText(""+score);
+        myScore.setText("" + score);
 
     }
     private void backToMenu() {

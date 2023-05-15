@@ -16,10 +16,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:textColor="@color/blue_500"
         android:textSize="60sp"
         android:textStyle="italic"
+        android:gravity="center"
+
         android:text="menu" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -27,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="80dp"
         android:textColor="@color/blue_200"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -48,8 +50,9 @@
         android:layout_height="50dp"
         android:textSize="16sp"
         android:layout_marginHorizontal="10dp"
+        android:gravity="center"
         android:backgroundTint="@color/green_500"
-        android:text=" slow" />
+        android:text="@string/slow" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fast_button"
@@ -57,7 +60,8 @@
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:textSize="16sp"
-            android:text=" fast" />
+            android:gravity="center"
+            android:text="@string/fast" />
 
         </LinearLayout>
     <com.google.android.material.textview.MaterialTextView
@@ -65,11 +69,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="230dp"
+        android:layout_marginTop="180dp"
         android:textColor="@color/blue_200"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:text="Play With sensor" />
+        android:gravity="center"
+        android:text="@string/play_with_sensor" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/sensor_button"
@@ -80,7 +85,8 @@
         android:textSize="16sp"
         android:layout_below="@id/sensor_mode"
         android:layout_centerHorizontal="true"
-        android:text="  sensor" />
+        android:gravity="center"
+        android:text="@string/sensor1" />
 
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -92,8 +98,8 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="50dp"
             android:textSize="19sp"
-
+            android:gravity="center"
             android:textAlignment="center"
-            android:text="  show my records" />
+            android:text="@string/show_my_records1" />
 
 </RelativeLayout>

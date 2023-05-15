@@ -1,17 +1,17 @@
 package models;
 
-import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.app.ActivityCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.carsgame.R;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.textview.MaterialTextView;
-import com.google.gson.Gson;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -42,12 +42,28 @@ public class MenuActivity extends AppCompatActivity {
         RecordsButton.setOnClickListener(v -> showRecords());
 
     }
+    public void onBackPressed() {
+        ActivityCompat.finishAffinity(this);
 
+    }
+    public void onDestroy() {
+        super.onDestroy();
+    }
+    protected void onPause() {
+        super.onPause();
+
+    }
+
+    protected void onResume() {
+        super.onResume();
+
+    }
     private void showRecords() {
         Intent i = new Intent(MenuActivity.this, recordsActivity.class);
         startActivity(i);
 
     }
+
 
     private void SetSensors() {
         Intent intent = new Intent(MenuActivity.this, MainActivity.class);

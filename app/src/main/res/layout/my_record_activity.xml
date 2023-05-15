@@ -31,25 +31,29 @@
             android:layout_marginTop="10dp"
             android:text="0000"
             android:textSize="40sp" />
-        <Button
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/all_records_button"
             android:layout_width="300dp"
-            android:layout_height="100dp"
+            android:layout_height="50dp"
             android:layout_below="@id/my_score"
             android:layout_marginTop="100dp"
             android:layout_centerHorizontal="true"
-            android:textSize="30sp"
-            android:text="show all records"/>
+            android:textSize="20sp"
+            android:gravity="center"
+            android:backgroundTint="@color/yellow_200"
+            android:text="@string/show_all_records"/>
 
-        <Button
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/back_button"
             android:layout_width="300dp"
-            android:layout_height="100dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:backgroundTint="@color/yellow_200"
             android:layout_below="@id/all_records_button"
             android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
-            android:textSize="30sp"
-            android:text="back to menu"/>
+            android:textSize="20sp"
+            android:text="@string/back_to_menu"/>
 
     </RelativeLayout>
 </RelativeLayout>

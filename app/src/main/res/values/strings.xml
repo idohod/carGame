@@ -15,5 +15,12 @@
     <string name="your_score">your score:</string>
     <string name="sensor">sensor</string>
     <string name="show_my_records">show my records</string>
+    <string name="slow">slow</string>
+    <string name="fast">fast</string>
+    <string name="play_with_sensor">Play With sensor</string>
+    <string name="sensor1">sensor</string>
+    <string name="show_my_records1">show my records</string>
+    <string name="back_to_menu">back to menu</string>
+    <string name="show_all_records">show all records</string>
 
 </resources>

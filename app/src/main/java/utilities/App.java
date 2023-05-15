@@ -1,4 +1,4 @@
-package logics;
+package utilities;
 
 import android.app.Application;
 import android.content.Context;
@@ -9,8 +9,15 @@ import android.widget.Toast;
 
 public class App extends Application {
 
+    public void onCreate() {
+        super.onCreate();
+
+        MySharedPreferences.init(this);
+        SignalGenerator.init(this);
+
+    }
     public void createToast(Context context) {
-        Toast.makeText(context,"crash! -5 points",Toast.LENGTH_LONG).show();
+        Toast.makeText(context,"crash! -5 points",Toast.LENGTH_SHORT).show();
 
     }
 

@@ -1,6 +1,5 @@
 package models;
 
-import static android.content.ContentValues.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -8,46 +7,38 @@ import androidx.appcompat.widget.AppCompatImageView;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.location.Location;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
 import interfaces.SensorCallback;
-import logics.App;
+import utilities.App;
 import logics.CarManager;
 import logics.CoinManager;
 import logics.GameManager;
 import logics.StoneManager;
-import utilities.MySP;
-import android.app.Application;
-import android.widget.Toast;
+import utilities.MySharedPreferences;
+import utilities.SensorMove;
 
 import com.example.carsgame.R;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-
 
 public class MainActivity extends AppCompatActivity {
-
     private final StoneManager stoneManager = new StoneManager();
     private final CarManager carManager = new CarManager();
     private final CoinManager coinManager = new CoinManager();
-
     private final App app = new App();
-
+    private FusedLocationProviderClient locationClient;
     private MediaPlayer mediaPlayer;
     private final Handler handler = new Handler();
     private int DELAY = 0;
@@ -55,11 +46,8 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton left_button;
     private FloatingActionButton right_button;
     private TextView textScore;
-
     private ShapeableImageView[] hearts;
-
     private AppCompatImageView backgroundImage;
-
     private RecordList allRecords;
     private SensorMove sensorMove;
 
@@ -85,8 +73,7 @@ public class MainActivity extends AppCompatActivity {
         return flag == 1;
     }
     private void load(){
-
-        String fromSP =  MySP.getInstance().getString("RECORDS","");
+        String fromSP =  MySharedPreferences.getInstance().getString("RECORDS","");
         RecordList recordListFromJson = new Gson().fromJson(fromSP,RecordList.class );
         if(allRecords == null){
             allRecords = new RecordList();
@@ -102,9 +89,7 @@ public class MainActivity extends AppCompatActivity {
         startView();
         setDelay();
         gameManager = new GameManager(hearts.length);
-         load();
-
-
+        load();
         Glide
                 .with(this)
                 .load("https://img.freepik.com/premium-photo/night-sky-with-many-stars_104337-8996.jpg")
@@ -122,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
         }
         handler.postDelayed(runnable, DELAY);
         refreshUI();
-
     }
 
     private void InitSensorMove() {
@@ -131,13 +115,12 @@ public class MainActivity extends AppCompatActivity {
             public void stepX() {
                 carManager.setCarCurPosition(sensorMove.getCarPositionX());
                 carManager.setCarPrePosition(sensorMove.getCarPrePosition());
-
                 refreshUI();
             }
 
             @Override
             public void stepY() {
-
+                DELAY = sensorMove.getDelay();
             }
 
             @Override
@@ -146,16 +129,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-
     public void onBackPressed() {
         super.onBackPressed();
-        handler.removeCallbacks(runnable);
+        finish();
     }
-
     public void onDestroy() {
         super.onDestroy();
         handler.removeCallbacks(runnable);
+        finish();
+
     }
     protected void onPause() {
         super.onPause();
@@ -176,7 +158,6 @@ public class MainActivity extends AppCompatActivity {
             sensorMove.start();
         }
     }
-
     private void startView() {
         if (sensorMode()) {
             left_button.setVisibility(View.INVISIBLE);
@@ -190,7 +171,6 @@ public class MainActivity extends AppCompatActivity {
         initStones();
         initCoins();
     }
-
     private void initCoins() {
 
         for (int i = 0; i < coinManager.getAllCoins().length; i++) {
@@ -203,7 +183,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
     private void initStones() {
 
         for (int i = 0; i < stoneManager.getAllStones().length; i++) {
@@ -218,21 +197,23 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
     private boolean checkCrash() {
         for (int i = 0; i < carManager.getCars().length; i++) {
             if (carManager.getCars()[i].getVisibility() == View.VISIBLE &&
                     stoneManager.getAllStones()[stoneManager.getAllStones().length - 1][i].getVisibility() == View.VISIBLE) {
                 gameManager.setCrash(gameManager.getCrash() + 1);
-                mediaPlayer = MediaPlayer.create(this, R.raw.explosion);
-                mediaPlayer.setVolume(1.0f, 1.0f);
-                mediaPlayer.start();
+                playSound(R.raw.explosion);
                 makeVibratorAndToast();
                 return true;
             }
         }
         return false;
+    }
 
+    private void playSound(int raw) {
+        mediaPlayer = MediaPlayer.create(this, raw);
+        mediaPlayer.setVolume(0.3f, 0.3f);
+        mediaPlayer.start();
     }
 
     private boolean collectCoin() {
@@ -251,9 +232,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 helpCollectCoinView();
-                mediaPlayer = MediaPlayer.create(this, R.raw.collectcoin);
-                mediaPlayer.setVolume(1.0f, 1.0f);
-                mediaPlayer.start();
+                playSound(R.raw.collectcoin);
                 return true;
             }
         }
@@ -277,18 +256,16 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
     private void makeVibratorAndToast() {
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         app.createVibrator(v);
         app.createToast(getApplicationContext());
-
     }
 
     private void refreshUI() {
+        changeScore();
         heartsView();
         carView();
-        changeScore();
     }
 
     private void carView() {
@@ -305,23 +282,32 @@ public class MainActivity extends AppCompatActivity {
             hearts[hearts.length - gameManager.getCrash()].setVisibility(View.INVISIBLE);
 
         if (gameManager.isGameEnded()) {
-            hearts[0].setVisibility(View.INVISIBLE);
-            gameManager.setCrash(0);
+            handler.removeCallbacks(runnable);
             addRecord();
-            Intent in = new Intent(MainActivity.this,MyRecordActivity.class);
-            in.putExtra("MY_RECORD",gameManager.getScore());
-            startActivity(in);
-
+            showMyRecord();
         }
     }
 
+    private void showMyRecord() {
+        Intent in = new Intent(MainActivity.this,MyRecordActivity.class);
+        in.putExtra("MY_RECORD",gameManager.getScore());
+        startActivity(in);
+    }
+
+    @SuppressLint("MissingPermission")
     private void addRecord() {
-
-        Record newRecord = new Record(gameManager.getScore());
-        putRecordInPosition(newRecord);
-        String recordsListJson = new Gson().toJson(allRecords);
-        MySP.getInstance().putString("RECORDS", recordsListJson);
-
+        locationClient = new FusedLocationProviderClient(this);
+        locationClient.getLastLocation().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Location location = task.getResult();
+                if (location != null) {
+                    Record newRecord = new Record(gameManager.getScore(), location.getLatitude(),location.getLongitude());
+                    putRecordInPosition(newRecord);
+                    String recordsListJson = new Gson().toJson(allRecords);
+                    MySharedPreferences.getInstance().putString("RECORDS", recordsListJson);
+                }
+            }
+        });
     }
    private Record maxRecord(){
         Record max = allRecords.getAllRecords().get(0);
@@ -343,7 +329,6 @@ public class MainActivity extends AppCompatActivity {
 
                } else if (allRecords.getAllRecords().size() < 10) {
                         allRecords.getAllRecords().add(0,newRecord);
-
                    return true;
                }
            }
@@ -369,18 +354,21 @@ public class MainActivity extends AppCompatActivity {
                             newRecord.getScore() >= allRecords.getAllRecords().get(i).getScore()) {
                         allRecords.getAllRecords().add(i, newRecord);
 
+
                         if (allRecords.getAllRecords().size() == 11) {
                             allRecords.getAllRecords().remove(10);
                             return;
                         }
+                        return;
+
                     }
+
 
                 }
                 if(allRecords.getAllRecords().size()<10) {
                     allRecords.getAllRecords().add(newRecord);
                 }
             }
-
         }
     }
 
@@ -420,15 +408,12 @@ public class MainActivity extends AppCompatActivity {
             } else if (left_button.isPressed() && carManager.getCarCurPosition() > 0) {
                 carManager.setCarPrePosition(carManager.getCarCurPosition());
                 carManager.setCarCurPosition(carManager.getCarCurPosition() - 1);
-
             }
         }
         refreshUI();
         checkCrash();
         collectCoin();
-
     }
-
     private void findViews() {
         hearts = new ShapeableImageView[]{
                 findViewById(R.id.main_IMG_heart1),
@@ -466,16 +451,12 @@ public class MainActivity extends AppCompatActivity {
                 {findViewById(R.id.coin80), findViewById(R.id.coin81), findViewById(R.id.coin82), findViewById(R.id.coin83), findViewById(R.id.coin84)}
 
         });
-
         left_button = findViewById(R.id.left_fab);
         right_button = findViewById(R.id.right_fab);
-
 
         textScore = findViewById(R.id.score);
         backgroundImage = findViewById(R.id.background);
     }
-
-
 }
 
 

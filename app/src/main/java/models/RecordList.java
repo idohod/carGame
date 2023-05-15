@@ -1,5 +1,7 @@
 package models;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 
 public class RecordList {
@@ -17,6 +19,7 @@ public class RecordList {
         this.allRecords = allRecords;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "RecordList{" +
